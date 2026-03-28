@@ -1,6 +1,7 @@
 <?php 
 namespace app\router;
 
+use app\controllers\Controller;
 use Closure;
 
 class Router
@@ -34,10 +35,10 @@ class Router
 
     public function init()
     {
-      //dd($this->routes);
+      // dando um foreach no array routes a onde o $route  vai ser a instancia de cada rota
       foreach ($this->routes as $route) {
         if ($route->match()) {
-          var_dump($route);
+          return (new Controller)->call($route);
         }
       }
     }

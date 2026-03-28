@@ -23,19 +23,33 @@ class Route
         return $this->routeOptions;
     }
 
+    public function currentRota()
+    {
+        return $_SERVER['REQUEST_URI'] !== '/dev/seu-pedido/public/' ? 
+        rtrim(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), '/') : '/dev/seu-pedido/public/';
+    }
+
+    public function currentRequest()
+    {
+        return strtolower($_SERVER['REQUEST_METHOD']);
+    }
+
     public function match()
     {
         // if para verificar se tem essa option no array
         if ($this->routeOptions->optionsExist('prefix')) {
             // essa option é para que todas as uri(rota) possuem esse prefixo passado pelo array de option
-            $this->rota = rtrim("/{$this->routeOptions->execute('prefix')}{$this->rota}",'/');
+            $this->rota = rtrim("{$this->rota}{$this->routeOptions->execute('prefix')}",'/');
         }
 
         if ($this->routeOptions->optionsExist('controller')) {
             $this->controller = "{$this->routeOptions->execute('controller')}{$this->controller}";
         }
 
-        return $this;
+        if ($this->rota == $this->currentRota() && strtolower($this->request) == $this->currentRequest()) {
+            return $this;
+        }
+
     }
 }
 

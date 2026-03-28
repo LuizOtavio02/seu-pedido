@@ -6,6 +6,13 @@ use Exception;
 
 class Controller
 {
+    private function controllerPath($route, $controller)
+    {
+        return ($route->getRouteGroupOptions() && $route->getRouteGroupOptions()->optionsExist('controller')) ?
+        "app\\controllers\\". $route->getRouteGroupOptions()->execute('controller')."\\".$controller : 
+        "app\\controllers\\site\\".$controller;
+    }
+
     public function call(Route $route)
     {
         $controller = $route->controller;
@@ -16,7 +23,7 @@ class Controller
 
         [$controller, $method] = explode(':', $controller);
 
-        $controllerInstance = "app\\controllers";
+        $controllerInstance = $this->controllerPath($route,$controller);
 
         if (!class_exists($controllerInstance)) {
             throw new Exception("Error controller: {$controllerInstance} não existe");

@@ -1,8 +1,10 @@
-DirectoryIndex index.php
-
 Options -Indexes
 RewriteEngine On
-RewriteBase /
+
+# Se não for arquivo ou diretório real
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^(.*)$ index.php/$1 [NC,L,QSA]
+
+# Redireciona tudo para index.php
+RewriteRule ^ index.php [L]
+
