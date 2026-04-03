@@ -2,48 +2,60 @@
 namespace app\router;
 
 use app\controllers\Controller;
-use Closure;
 
 class Router
 {
-    private array $routes = [];
-    private array $routeOptions = []; 
+    private $routes;
+    private $uri;
 
-    public function add($rota, $request, $controller)
-    {
-      // passo para a classe Route a rota, requisição e o controller
-      $route = new Route($rota,$request,$controller);
-
-      // se for add pelo group passo o array de options se nao passa um array vazio
-      $route->addRouteGroupOptions(new RouteOptions($this->routeOptions));
-
-      // salvo no array routes instancias da classe Route com a rota, requisição e o controller e com seu array de options
-      $this->routes[] = $route;
+    public function __construct(Routes $routes) {
+        $this->routes = $routes->getRoutes();
+        $this->uri = new Uri;
     }
 
-    public function group(array $options, Closure $callback)
+    private function simpleRoute() : ?string
     {
-      // atribuo o array de options
-      $this->routeOptions = $options;
+        if (array_key_exists($this->uri->currentUri(), $this->routes[$this->uri->request()])) {
+            return $this->routes[$this->uri->request()][$this->uri->currentUri()];
+        }
 
-      // passo para o callback o this que é a instancia dessa própria classe para poder utilizar o método add
-      $callback->call($this);
-
-      // após o uso esvazio o array de options para que não passe options para rotas que nao precisam
-      $this->routeOptions = [];
+        return null;
     }
 
+    private function dynamicRoute() : ?string
+    {
+        $uri = $this->uri->currentUri();
+
+        $route = null;
+
+        foreach ($this->routes[$this->uri->request()] as $key => $value) {
+            $pattern = str_replace('/','\/',ltrim($key,'/'));
+            if ($key !== '/' && preg_match("/^$pattern$/",ltrim($uri,'/'))) {
+                $route = $value;
+                break;
+            }
+        }
+
+        return $route;
+    }
+    
     public function init()
     {
-      // dando um foreach no array routes a onde o $route  vai ser a instancia de cada rota
-      foreach ($this->routes as $route) {
-        if ($route->match()) {
-          return (new Controller)->call($route);
-        }
-      }
-    }
+        $controller = new Controller;
 
+        if ($this->simpleRoute()) {
+            return $controller->call($this->simpleRoute());
+        }
+
+        if ($this->dynamicRoute()) {
+            return $controller->call($this->dynamicRoute());
+        }
+
+        return $controller->call('ErrorController@index');
+    }
 }
+
+
 
 
 ?>
