@@ -2,6 +2,7 @@
 namespace app\router;
 
 use app\controllers\Controller;
+use app\template\Template;
 
 class Router
 {
@@ -42,16 +43,18 @@ class Router
     public function init()
     {
         $controller = new Controller;
+        $template = new Template;
+        $twig = $template->init();
 
         if ($this->simpleRoute()) {
-            return $controller->call($this->simpleRoute());
+            return $controller->call($this->simpleRoute(),$twig);
         }
 
         if ($this->dynamicRoute()) {
-            return $controller->call($this->dynamicRoute());
+            return $controller->call($this->dynamicRoute(), $twig);
         }
 
-        return $controller->call('ErrorController@index');
+        return $controller->call('ErrorController@index', $twig);
     }
 }
 

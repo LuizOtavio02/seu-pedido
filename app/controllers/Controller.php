@@ -9,7 +9,7 @@ class Controller
     private const NAMESPACE_CONTROLLER = "\\app\\controllers\\";
     private const ERROR_CONTROLLER = "\\app\\controllers\\error\\";
     
-    public function call($route) : void
+    public function call($route, $twig) : void
     {
         if ($route === 'ErrorController@index') {
             [$controller, $method] = explode('@',$route);
@@ -36,6 +36,10 @@ class Controller
         }
 
         $controller = new $controllerNamespace;
+
+        if (!str_contains($controllerNamespace,'Api')) {
+            $controller->setTwig($twig);
+        }
 
         if (!method_exists($controller,$method)) {
             throw new Exception("O Método {$method} não existe");

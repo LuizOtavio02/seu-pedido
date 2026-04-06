@@ -1,11 +1,19 @@
 <?php 
 namespace app\controllers\site;
 
-class HomeController
+use app\controllers\BaseController;
+
+class HomeController extends BaseController
 {
     public function index()
     {
-        dd("No Index do HomeController");
+        $dados = [
+            'titulo' => 'Home'
+        ];
+
+        $template = $this->twig->Load('home.html');
+
+        $template->display($dados);
     }
 }
 

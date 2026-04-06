@@ -1,7 +1,9 @@
 <?php 
 namespace app\controllers\error;
 
-class ErrorController
+use app\controllers\BaseController;
+
+class ErrorController extends BaseController
 {
     public function index()
     {
