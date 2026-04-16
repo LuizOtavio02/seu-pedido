@@ -39,6 +39,15 @@ class Router
 
         return $route;
     }
+
+    private function params($route) : array
+    {
+        $search = array_search($route, $this->routes[$this->uri->request()]);
+        $explodeUri = explode('/',$this->uri->currentUri());
+        $explodeSearch = explode('/', $search);
+
+        return array_values(array_diff($explodeUri,$explodeSearch));
+    }
     
     public function init()
     {
@@ -51,7 +60,8 @@ class Router
         }
 
         if ($this->dynamicRoute()) {
-            return $controller->call($this->dynamicRoute(), $twig);
+            $param = $this->params($this->dynamicRoute());
+            return $controller->call($this->dynamicRoute(), $twig, $param);
         }
 
         return $controller->call('ErrorController@index', $twig);

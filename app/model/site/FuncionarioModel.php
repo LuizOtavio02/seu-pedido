@@ -1,0 +1,14 @@
+<?php 
+namespace app\model\site;
+
+use app\model\Model;
+
+class FuncionarioModel extends Model
+{
+    public $table = 'funcionario';
+}
+
+
+
+
+?>

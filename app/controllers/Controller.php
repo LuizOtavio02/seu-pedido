@@ -9,7 +9,7 @@ class Controller
     private const NAMESPACE_CONTROLLER = "\\app\\controllers\\";
     private const ERROR_CONTROLLER = "\\app\\controllers\\error\\";
     
-    public function call($route, $twig) : void
+    public function call($route, $twig, $param = []) : void
     {
         if ($route === 'ErrorController@index') {
             [$controller, $method] = explode('@',$route);
@@ -45,7 +45,7 @@ class Controller
             throw new Exception("O Método {$method} não existe");
         }
 
-        $controller->$method();
+        $controller->$method($param);
     }
 }
 
