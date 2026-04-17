@@ -24,6 +24,19 @@ class Model
         return $prepare->fetch();
     }
 
+    public function create($data)
+    {
+        $fields = array_keys($data);
+        $columns = implode(', ',$fields);
+        $params = implode(', :',$fields);
+
+        $query = "insert into {$this->table} ({$columns}) values ({$params})";
+        $prepare = $this->pdo->prepare($query);
+        $prepare->execute($data);
+
+        return $this->pdo->lastInsertId();
+    }
+
 }
 
 

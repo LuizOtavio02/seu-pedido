@@ -23,7 +23,7 @@ class Controller
         }
 
         [$controller, $method] = explode('@',$route);
-
+        
         foreach (self::CONTROLLERS_FOLDER as $folders) {
             if (class_exists(self::NAMESPACE_CONTROLLER.$folders."\\".$controller)) {
                 $controllerNamespace = self::NAMESPACE_CONTROLLER.$folders."\\".$controller;

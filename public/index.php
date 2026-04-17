@@ -9,7 +9,8 @@ session_start();
 
 $routes = new Routes;
 $routes->addRoute('get', '/','HomeController@index');
-$routes->addRoute('get', '/admin/[0-9]+','AdminController@index');
+$routes->addRoute('get', '/login','LoginController@index');
+$routes->addRoute('post', '/api/login','ApiAuthController@login');
 
 $router = new Router($routes);
 $router->init();
