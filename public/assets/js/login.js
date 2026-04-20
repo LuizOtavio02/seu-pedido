@@ -24,6 +24,9 @@ document.getElementById('form-login').addEventListener('submit', function (e) {
     .then(response => response.json())
     .then(data => {
         console.log(data);
+        if (data.success) {
+            window.location.href = "http://www.seupedido.test/";
+        }
     })
     .catch(error => {
         console.log('Erro: ', error);

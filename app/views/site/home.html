@@ -2,10 +2,39 @@
 
 {% block site_content %}
 
-<h1>Home</h1>
+<div class="d-flex" id="wrapper">
+    <div class="border-end" id="sidebar-wrapper">
+        <div class="sidebar-heading border-bottom bg-dark">Meu Projeto</div>
+        <div class="list-group list-group-flush">
+            <a href="index.html" class="nav-link-custom border-bottom border-secondary">🏠 Home</a>
+            <a href="perfil.html" class="nav-link-custom border-bottom border-secondary">👤 Perfil</a>
+            <a href="config.html" class="nav-link-custom border-bottom border-secondary">⚙️ Configurações</a>
+            <a href="ajuda.html" class="nav-link-custom">❓ Ajuda</a>
+        </div>
+    </div>
 
+    <div id="page-content-wrapper" class="w-100">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+            <div class="container-fluid">
+                <button class="btn btn-primary" id="menu-toggle">☰ Menu</button>
+                <span class="ms-2">Minha Aplicação Web</span>
+            </div>
+        </nav>
+
+        <div class="container-fluid p-4">
+            <h1 class="mt-4">Conteúdo Principal</h1>
+            <p>No <strong>PC</strong>, a barra lateral fica fixa. Se você clicar no botão (ou diminuir a janela), ela se
+                esconde.</p>
+            <p>No <strong>Celular</strong>, ela começa escondida e o botão "Menu" faz ela aparecer.</p>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="/assets/css/styleHome.css">
 {% endblock %}
 
 {% block scripts %}
-<script src="/assets/js/login.js" defer></script>
+<script src="/assets/js/Home.js" defer></script>
 {% endblock %}

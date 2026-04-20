@@ -1,0 +1,63 @@
+/* Estrutura base */
+body {
+    overflow-x: hidden;
+}
+
+/* Sidebar para Desktop */
+#sidebar-wrapper {
+    min-height: 100vh;
+    margin-left: -15rem;
+    transition: margin 0.25s ease-out;
+    background-color: #212529;
+    /* Cor escura */
+}
+
+#sidebar-wrapper .sidebar-heading {
+    padding: 0.875rem 1.25rem;
+    font-size: 1.2rem;
+    color: white;
+}
+
+#sidebar-wrapper .list-group {
+    width: 15rem;
+}
+
+/* Quando a tela for grande (PC), a margem volta ao normal */
+@media (min-width: 768px) {
+    #sidebar-wrapper {
+        margin-left: 0;
+    }
+
+    #page-content-wrapper {
+        min-width: 0;
+        width: 100%;
+    }
+
+    /* Esconde o botão de abrir no PC se você quiser a barra sempre lá */
+    #menu-toggle {
+        display: none;
+    }
+}
+
+/* Classe para esconder/mostrar via JS */
+#wrapper.toggled #sidebar-wrapper {
+    margin-left: 0;
+}
+
+@media (min-width: 768px) {
+    #wrapper.toggled #sidebar-wrapper {
+        margin-left: -15rem;
+    }
+}
+
+.nav-link-custom {
+    color: rgba(255, 255, 255, .8);
+    padding: 15px;
+    text-decoration: none;
+    display: block;
+}
+
+.nav-link-custom:hover {
+    background-color: #343a40;
+    color: white;
+}
