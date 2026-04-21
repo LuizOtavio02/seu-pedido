@@ -30,6 +30,7 @@ class FuncionarioSession
                 'nome' => $funcionario['nome'],
                 'username' => $funcionario['username'],
                 'tipo' => $funcionario['tipo'],
+                'logado' => true
             ];
 
             $this->session->criarSessao($data);
@@ -39,9 +40,20 @@ class FuncionarioSession
         }
     }
 
-    public function cadastrar()
+    public function cadastrar($data)
     {
-        
+        $data['senha'] = $this->password->hash($data['senha']);
+
+        return $this->funcionario->create($data);
+    }
+
+    public function logado()
+    {
+        if (isset($_SESSION['funcionario']['logado']) && $_SESSION['funcionario']['logado'] == true) {
+            return $this->session->sessao();
+        }
+
+        return false;
     }
 }
 

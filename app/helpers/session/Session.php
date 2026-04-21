@@ -11,9 +11,7 @@ class Session
 
     public function criarSessao($data)
     {
-        if (!$this->sessaoExiste()) {
-            $_SESSION['funcionario'] = $data;
-        }
+        $_SESSION['funcionario'] = $data;
     }
 
     public function sessao()
