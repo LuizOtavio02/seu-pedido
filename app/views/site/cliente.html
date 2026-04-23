@@ -1,0 +1,111 @@
+{% extends 'layout.html' %}
+
+{% block site_content %}
+<div class="d-flex" id="wrapper">
+    <div class="border-end" id="sidebar-wrapper">
+        <div class="sidebar-heading border-bottom bg-dark">Meu Projeto</div>
+        <div class="list-group list-group-flush">
+            <a href="/" class="nav-link-custom border-bottom border-secondary">Home</a>
+            <a href="/produtos" class="nav-link-custom border-bottom border-secondary">Produtos</a>
+            <a href="/cliente" class="nav-link-custom border-bottom border-secondary">Cliente</a>
+            <a href="/carrinho" class="nav-link-custom border-bottom border-secondary">Carrinho</a>
+            <a href="/admin" class="nav-link-custom">Admin</a>
+        </div>
+    </div>
+
+    <div id="page-content-wrapper" class="w-100">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+            <div class="container-fluid">
+                <button class="btn btn-primary" id="menu-toggle">☰ Menu</button>
+                <span id="nome" class="ms-2"></span>
+            </div>
+        </nav>
+
+        <div class="container-fluid p-4">
+            <div class="row justify-content-center">
+                <div class="col-lg-6 col-md-8">
+
+                    <div class="card shadow">
+                        <div class="card-header text-center">
+                            <h4>Fidelização de Cliente</h4>
+                        </div>
+
+                        <div class="card-body">
+                            <form id="cliente-form">
+
+                                <!-- Dados do cliente -->
+                                <h5 class="mb-3">Dados do Cliente</h5>
+
+                                <!---->
+                                <div class="mb-3">
+                                    <label class="form-label">Nome</label>
+                                    <input id="nome-cliente" type="text" class="form-control" name="nome"
+                                        placeholder="Digite o nome completo">
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label">Telefone</label>
+                                    <input id="telefone" type="text" class="form-control" name="telefone"
+                                        placeholder="(00) 00000-0000">
+                                </div>
+
+                                <!-- Endereço -->
+                                <h5 class="mt-4 mb-3">Endereço</h5>
+
+                                <div class="row">
+                                    <div class="col-md-4 mb-3">
+                                        <label class="form-label">Estado</label>
+                                        <input id="estado" type="text" class="form-control" name="estado">
+                                    </div>
+
+                                    <div class="col-md-4 mb-3">
+                                        <label class="form-label">Cidade</label>
+                                        <input id="cidade" type="text" class="form-control" name="cidade">
+                                    </div>
+
+                                    <div class="col-md-4 mb-3">
+                                        <label class="form-label">Bairro</label>
+                                        <input id="bairro" type="text" class="form-control" name="bairro">
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-8 mb-3">
+                                        <label class="form-label">Rua</label>
+                                        <input id="rua" type="text" class="form-control" name="rua">
+                                    </div>
+
+                                    <div class="col-md-4 mb-3">
+                                        <label class="form-label">Número</label>
+                                        <input id="numero" type="text" class="form-control" name="numero">
+                                    </div>
+                                </div>
+
+                                <div id="message"></div>
+
+                                <!-- Botão -->
+                                <div class="text-end mt-3">
+                                    <button type="submit" class="btn btn-primary">
+                                        Cadastrar Cliente
+                                    </button>
+                                </div>
+
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="/assets/css/styleHome.css">
+{% endblock %}
+
+{% block scripts %}
+<script src="/assets/js/cliente.js"></script>
+{% endblock %}

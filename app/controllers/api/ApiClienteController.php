@@ -25,8 +25,13 @@ class ApiClienteController
 
         header('Content-Type: application/json');
 
-        if (!$input || empty($input['nome'])) {
-            # code...
+        if (!$input || empty($input['nome']) || empty($input['telefone']) || empty($input['estado']) || empty($input['cidade']) || empty($input['bairro']) || empty($input['rua']) || empty($input['numero'])) {
+            http_response_code(400);
+            echo json_encode([
+                'success' => false,
+                'message' => 'Não foi possível realizar o cadastro Algum campo esta vazio'
+            ], JSON_PRETTY_PRINT);
+            return;
         }
 
         $cliente = [
@@ -45,9 +50,9 @@ class ApiClienteController
             'cliente_id' => $clienteId
         ];
 
-        $clienteEndereco = $this->endereco->create($endereco); 
+        $clienteEndereco = $this->endereco->create($endereco);
 
-        
+
 
         http_response_code(200);
         echo json_encode([
