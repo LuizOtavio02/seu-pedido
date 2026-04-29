@@ -5,7 +5,7 @@ use app\model\Model;
 
 class ClienteModel extends Model
 {
-    public $table = 'cliente';
+    public string $table = 'cliente';
 }
 
 

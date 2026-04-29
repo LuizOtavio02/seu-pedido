@@ -5,7 +5,7 @@ use app\model\Model;
 
 class EnderecoModel extends Model
 {
-    public $table = 'endereco';
+    public string $table = 'endereco';
 }
 
 

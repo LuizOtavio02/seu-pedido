@@ -7,13 +7,22 @@ use PDO;
 class Model
 {
     protected ?PDO $pdo = null;
-    protected $table;
+    protected string $table;
 
     public function __construct() {
         $this->pdo = Connection::connect();
     }
 
-    public function find($field, $value)
+    public function fetchAll()
+    {
+        $query = "select * from {$this->table}";
+        $prepare = $this->pdo->prepare($query);
+        $prepare->execute();
+
+        return $prepare->fetchAll();
+    }
+
+    public function find(string $field, string $value)
     {
         $query = "select * from {$this->table} where {$field} = :{$field}";
         $prepare = $this->pdo->prepare($query);
@@ -24,7 +33,7 @@ class Model
         return $prepare->fetch();
     }
 
-    public function create($data)
+    public function create(array $data)
     {
         $fields = array_keys($data);
         $columns = implode(', ',$fields);

@@ -17,7 +17,7 @@ $routes->addRoute('get', '/carrinho','CarrinhoController@index');
 $routes->addRoute('get', '/admin','AdminController@index');
 // API GET
 $routes->addRoute('get', '/api/sessao','ApiAuthController@logado');
-
+$routes->addRoute('get', '/api/produtos','ApiProdutosController@listarProdutos');
 // API POST
 $routes->addRoute('post', '/api/login','ApiAuthController@login');
 $routes->addRoute('post', '/api/cadastro','ApiAuthController@cadastro');

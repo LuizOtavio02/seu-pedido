@@ -1,11 +1,39 @@
 {% extends 'layout.html' %}
 
 {% block site_content %}
-<h1>Carrinho</h1>
+
+<div class="d-flex" id="wrapper">
+    <div class="border-end" id="sidebar-wrapper">
+        <div class="sidebar-heading border-bottom bg-dark">Meu Projeto</div>
+        <div class="list-group list-group-flush">
+            <a href="/" class="nav-link-custom border-bottom border-secondary">Home</a>
+            <a href="/produtos" class="nav-link-custom border-bottom border-secondary">Produtos</a>
+            <a href="/cliente" class="nav-link-custom border-bottom border-secondary">Cliente</a>
+            <a href="/carrinho" class="nav-link-custom border-bottom border-secondary">Carrinho</a>
+            <a href="/admin" class="nav-link-custom">Admin</a>
+        </div>
+    </div>
+
+    <div id="page-content-wrapper" class="w-100">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+            <div class="container-fluid">
+                <button class="btn btn-primary" id="menu-toggle">☰ Menu</button>
+                <span id="nome" class="ms-2"></span>
+            </div>
+        </nav>
+
+        <div class="container-fluid p-4">
+            <h1 class="mt-4">Conteúdo Principal</h1>
+            <p>No <strong>PC</strong>, a barra lateral fica fixa. Se você clicar no botão (ou diminuir a janela), ela se
+                esconde.</p>
+            <p>No <strong>Celular</strong>, ela começa escondida e o botão "Menu" faz ela aparecer.</p>
+        </div>
+    </div>
+</div>
 {% endblock %}
 
 {% block css %}
-
+<link rel="stylesheet" href="/assets/css/style.css">
 {% endblock %}
 
 {% block scripts %}

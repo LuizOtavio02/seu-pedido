@@ -5,7 +5,7 @@ use app\model\Model;
 
 class FuncionarioModel extends Model
 {
-    public $table = 'funcionario';
+    public string $table = 'funcionario';
 }
 
 

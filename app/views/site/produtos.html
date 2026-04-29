@@ -1,13 +1,44 @@
 {% extends 'layout.html' %}
 
 {% block site_content %}
-<h1>Produtos</h1>
+
+<div class="d-flex" id="wrapper">
+    <div class="border-end" id="sidebar-wrapper">
+        <div class="sidebar-heading border-bottom bg-dark">Meu Projeto</div>
+        <div class="list-group list-group-flush">
+            <a href="/" class="nav-link-custom border-bottom border-secondary">Home</a>
+            <a href="/produtos" class="nav-link-custom border-bottom border-secondary">Produtos</a>
+            <a href="/cliente" class="nav-link-custom border-bottom border-secondary">Cliente</a>
+            <a href="/carrinho" class="nav-link-custom border-bottom border-secondary">Carrinho</a>
+            <a href="/admin" class="nav-link-custom">Admin</a>
+        </div>
+    </div>
+
+    <div id="page-content-wrapper" class="w-100">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+            <div class="container-fluid">
+                <button class="btn btn-primary" id="menu-toggle">☰ Menu</button>
+                <span id="nome" class="ms-2"></span>
+            </div>
+        </nav>
+
+        <div class="container-fluid p-4">
+            <div class="album py-5 bg-body-tertiary">
+                <div class="container">
+                    <div id="listar-produtos" class="row row-cols-1 row-cols-md-3 g-3">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}
 
 {% block css %}
-
+<link rel="stylesheet" href="/assets/css/style.css">
 {% endblock %}
 
 {% block scripts %}
-
+<script src="/assets/js/produto.js"></script>
 {% endblock %}

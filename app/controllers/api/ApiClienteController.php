@@ -8,9 +8,9 @@ use app\model\site\EnderecoModel;
 
 class ApiClienteController
 {
-    private $filter;
-    private $cliente;
-    private $endereco;
+    private Filter $filter;
+    private ClienteModel $cliente;
+    private EnderecoModel $endereco;
 
     public function __construct()
     {
