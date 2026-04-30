@@ -22,6 +22,7 @@ $routes->addRoute('get', '/api/produtos','ApiProdutosController@listarProdutos')
 $routes->addRoute('post', '/api/login','ApiAuthController@login');
 $routes->addRoute('post', '/api/cadastro','ApiAuthController@cadastro');
 $routes->addRoute('post', '/api/cliente','ApiClienteController@create');
+$routes->addRoute('post', '/api/carrinho','ApiCarrinhoController@add');
 
 $router = new Router($routes);
 $router->init();
