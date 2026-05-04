@@ -1,16 +1,22 @@
-fetch('/api/produtos', {
+document.addEventListener('DOMContentLoaded', function () {
+    produtos();
+    addCarrinho();
+});
+
+function produtos() {
+  fetch('/api/produtos', {
     method: 'GET',
     headers: {
-        'Content-Type': 'application/json'
+      'Content-Type': 'application/json'
     }
-})
+  })
     .then(response => response.json())
     .then(data => {
-        if (data.success) {
-            let html = '';
+      if (data.success) {
+        let html = '';
 
-            data.produtos.forEach(produto => {
-                html += `<div class="col">
+        data.produtos.forEach(produto => {
+          html += `<div class="col">
           <div class="card shadow-sm">
 
             <svg
@@ -48,11 +54,43 @@ fetch('/api/produtos', {
 
           </div>
         </div>`;
-            });
+        });
 
-            document.getElementById('listar-produtos').innerHTML = html;
-        }
+        document.getElementById('listar-produtos').innerHTML = html;
+      }
     })
     .catch(error => {
-        console.log('Erro: ', error);
+      console.log('Erro: ', error);
     })
+}
+
+
+function addCarrinho() {
+  document.addEventListener('click', function (e) {
+   
+    if (e.target.classList.contains('btn-add-carrinho')) {
+      e.preventDefault();
+
+      const produtoId = e.target.getAttribute('data-id');
+
+      fetch('/api/carrinho', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          'id': produtoId
+        })
+      })
+      .then(response => response.json())
+      .then(data => {
+        console.log(data);
+      })
+      .catch(error => {
+        console.log('Erro: ', error);
+      })
+    }
+  })
+  
+  
+}
