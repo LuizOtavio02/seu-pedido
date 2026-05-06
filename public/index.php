@@ -24,6 +24,10 @@ $routes->addRoute('post', '/api/login','ApiAuthController@login');
 $routes->addRoute('post', '/api/cadastro','ApiAuthController@cadastro');
 $routes->addRoute('post', '/api/cliente','ApiClienteController@create');
 $routes->addRoute('post', '/api/carrinho','ApiCarrinhoController@add');
+// API PUT
+$routes->addRoute('put', '/api/carrinho/[0-9]+','ApiCarrinhoController@update');
+// API DELETE
+$routes->addRoute('delete', '/api/carrinho/[0-9]+','ApiCarrinhoController@delete');
 
 $router = new Router($routes);
 $router->init();

@@ -28,6 +28,16 @@ class ApiCarrinhoController
         $produtos = [];
         $valorCarrinho = 0;
 
+        if (empty($carrinho)) {
+            http_response_code(200);
+            echo json_encode([
+                'success' => true,
+                'message' => 'Carrinho Vazio',
+                'produtos' => $produtos
+            ], JSON_PRETTY_PRINT);
+            return;
+        }
+
         foreach ($carrinho as $id => $qtd) {
             $produtoCarrinho = $this->produtoModel->find('id', $id);
             $valor = $produtoCarrinho['preco'];
@@ -76,6 +86,54 @@ class ApiCarrinhoController
             'success' => true,
             'message' => 'Adicionado ao carrinho',
             'carrinho' => $_SESSION['carrinho']
+        ], JSON_PRETTY_PRINT);
+    }
+
+    public function update()
+    {
+        $input = json_decode(file_get_contents("php://input"), true);
+
+        header('Content-Type: application/json');
+
+        if (!$input) {
+            http_response_code(400);
+            echo json_encode([
+                'success' => false,
+                'message' => 'Não foi possível atualizar o carrinho'
+            ], JSON_PRETTY_PRINT);
+            return;
+        }
+
+        $this->carrinho->update($input['id'], $input['qtd']);
+
+        http_response_code(201);
+        echo json_encode([
+            'success' => true,
+            'message' => 'Carrinho Atualizado',
+        ], JSON_PRETTY_PRINT);
+    }
+
+    public function delete()
+    {
+        $input = json_decode(file_get_contents("php://input"), true);
+
+        header('Content-Type: application/json');
+
+        if (!$input) {
+            http_response_code(400);
+            echo json_encode([
+                'success' => false,
+                'message' => 'Não foi possível deletar do carrinho'
+            ], JSON_PRETTY_PRINT);
+            return;
+        }
+
+        $this->carrinho->delete($input['id']);
+
+        http_response_code(201);
+        echo json_encode([
+            'success' => true,
+            'message' => 'Carrinho Atualizado',
         ], JSON_PRETTY_PRINT);
     }
 }

@@ -1,14 +1,4 @@
 window.addEventListener('DOMContentLoaded', event => {
-    const menuToggle = document.body.querySelector('#menu-toggle');
-    if (menuToggle) {
-        menuToggle.addEventListener('click', event => {
-            event.preventDefault();
-            document.body.querySelector('#wrapper').classList.toggle('toggled');
-        });
-    }
-});
-
-window.addEventListener('DOMContentLoaded', event => {
 document.getElementById('cliente-form').addEventListener('submit', function (e) {
     e.preventDefault();
 

@@ -6,11 +6,26 @@ function carrinho() {
     fetch('/api/carrinho', {
         method: 'GET'
     })
-    .then((response => response.json()))
-    .then(data => {
-        let html = '';
+        .then((response => response.json()))
+        .then(data => {
+            let html = '';
 
-        data.produtos.forEach(produto => {
+            if (!data.produtos || data.produtos.length === 0) {
+                html = `
+                        <tr>
+                            <td colspan="6" class="text-center">
+                                🛒 Seu carrinho está vazio
+                            </td>
+                        </tr>
+                    `;
+
+                document.getElementById('tbody').innerHTML = html;
+                document.getElementById('tfoot').innerHTML = '';
+
+                return;
+            }
+
+            data.produtos.forEach(produto => {
                 html += `<tr>
                 <th>${produto.produtos.id}</th>
                 <td>${produto.produtos.nome}</td>
@@ -36,8 +51,67 @@ function carrinho() {
 
             document.getElementById('tbody').innerHTML = html;
             document.getElementById('tfoot').innerHTML = htmlFoot;
-    })
-    .catch( error => {
-        console.log('Erro: ', error);
-    })
+        })
+        .catch(error => {
+            console.log('Erro: ', error);
+        })
 }
+
+document.addEventListener('click', function (e) {
+    if (e.target.classList.contains('btn-qtd')) {
+        e.preventDefault();
+
+        const produtoId = e.target.getAttribute('data-id');
+        const value = e.target.getAttribute('value');
+
+        fetch('/api/carrinho/' + produtoId, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                'id': produtoId,
+                'qtd': value
+            })
+        })
+            .then(response => response.json())
+            .then(data => {
+                if (data) {
+                    carrinho();
+                }
+            })
+            .catch(error => {
+                console.log('Erro: ', error);
+            })
+    }
+
+})
+
+document.addEventListener('click', function (e) {
+    if (e.target.classList.contains('btn-delete')) {
+        e.preventDefault();
+
+        const produtoId = e.target.getAttribute('data-id');
+
+        fetch('/api/carrinho/' + produtoId, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                'id': produtoId
+            })
+        })
+            .then(response => response.json())
+            .then(data => {
+                if (data) {
+                    carrinho();
+                }
+            })
+            .catch(error => {
+                console.log('Erro: ', error);
+            })
+
+    }
+
+})

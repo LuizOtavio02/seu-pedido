@@ -19,6 +19,24 @@ class Carrinho
 
         $_SESSION['carrinho'][$id] = 1;
     }
+
+    public function update(int $id, int $qtd)
+    {
+        if ($this->statusCarrinho->produtoCarrinho($id)) {
+            if ($_SESSION['carrinho'][$id] == 0 && $qtd == -1) {
+                return;
+            }
+            $_SESSION['carrinho'][$id] += $qtd;
+        }
+
+    }
+
+    public function delete(int $id)
+    {
+        if ($this->statusCarrinho->produtoCarrinho($id)) {
+            unset($_SESSION['carrinho'][$id]);
+        }
+    }
 }
 
 
