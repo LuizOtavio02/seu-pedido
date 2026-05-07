@@ -1,15 +1,16 @@
 {% extends 'layout.html' %}
 
 {% block site_content %}
+
 <div class="d-flex" id="wrapper">
     <div class="border-end" id="sidebar-wrapper">
         <div class="sidebar-heading border-bottom bg-dark">Meu Projeto</div>
         <div class="list-group list-group-flush">
-            <a href="/admin" class="nav-link-custom border-bottom border-secondary">Home</a>
-            <a href="/admin/produtos" class="nav-link-custom border-bottom border-secondary">Produtos</a>
-            <a href="/admin/cliente" class="nav-link-custom border-bottom border-secondary">Cliente</a>
-            <a href="/admin/equipe" class="nav-link-custom border-bottom border-secondary">Equipe</a>
-            <a href="/" class="nav-link-custom">Funcionario</a>
+            <a href="/" class="nav-link-custom border-bottom border-secondary">Home</a>
+            <a href="/produtos" class="nav-link-custom border-bottom border-secondary">Produtos</a>
+            <a href="/cliente" class="nav-link-custom border-bottom border-secondary">Cliente</a>
+            <a href="/carrinho" class="nav-link-custom border-bottom border-secondary">Carrinho</a>
+            <a href="/admin" class="nav-link-custom">Admin</a>
         </div>
     </div>
 
@@ -36,5 +37,5 @@
 {% endblock %}
 
 {% block scripts %}
-
+<script src="/assets/js/home.js" defer></script>
 {% endblock %}

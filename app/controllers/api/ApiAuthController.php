@@ -6,8 +6,8 @@ use app\helpers\funcionario\FuncionarioSession;
 
 class ApiAuthController
 {
-    private $funcionario;
-    private $filter;
+    private FuncionarioSession $funcionario;
+    private Filter $filter;
     
 
     public function __construct() {

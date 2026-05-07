@@ -9,7 +9,7 @@ class Session
         return (isset($_SESSION['funcionario'])) ? true : false;
     }
 
-    public function criarSessao($data)
+    public function criarSessao(array $data)
     {
         $_SESSION['funcionario'] = $data;
     }
@@ -25,5 +25,10 @@ class Session
             header('Location: /login');
             exit;
         }
+    }
+
+    public function authAdmin()
+    {
+        return ($_SESSION['funcionario']['tipo'] == 'admin') ? true : false;
     }
 }

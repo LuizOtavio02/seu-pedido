@@ -1,0 +1,142 @@
+{% extends 'layout.html' %}
+
+{% block site_content %}
+<div class="d-flex" id="wrapper">
+    <div class="border-end" id="sidebar-wrapper">
+        <div class="sidebar-heading border-bottom bg-dark">Meu Projeto</div>
+        <div class="list-group list-group-flush">
+            <a href="/admin" class="nav-link-custom border-bottom border-secondary">Home</a>
+            <a href="/admin/produtos" class="nav-link-custom border-bottom border-secondary">Produtos</a>
+            <a href="/admin/cliente" class="nav-link-custom border-bottom border-secondary">Cliente</a>
+            <a href="/admin/equipe" class="nav-link-custom border-bottom border-secondary">Equipe</a>
+            <a href="/" class="nav-link-custom">Funcionario</a>
+        </div>
+    </div>
+
+    <div id="page-content-wrapper" class="w-100">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+            <div class="container-fluid">
+                <button class="btn btn-primary" id="menu-toggle">☰ Menu</button>
+                <span id="nome" class="ms-2"></span>
+            </div>
+        </nav>
+
+        <div class="container-fluid p-4">
+            <div class="container py-5">
+
+                <div class="row justify-content-center">
+                    <div class="col-lg-8">
+
+                        <!-- BUSCA -->
+                        <div class="card shadow-sm mb-4">
+
+                            <div class="card-header">
+                                <h4 class="mb-0">Buscar Funcionário</h4>
+                            </div>
+
+                            <div class="card-body">
+
+                                <form class="row g-3">
+
+                                    <div class="col-md-10">
+                                        <input type="text" class="form-control"
+                                            placeholder="Digite o nome ou username do funcionário">
+                                    </div>
+
+                                    <div class="col-md-2 d-grid">
+                                        <button class="btn btn-dark">
+                                            Buscar
+                                        </button>
+                                    </div>
+
+                                </form>
+
+                            </div>
+                        </div>
+
+                        <!-- FORMULÁRIO -->
+                        <div class="card shadow-sm">
+
+                            <div class="card-header text-center">
+                                <h3>Cadastro de Funcionário</h3>
+                            </div>
+
+                            <div class="card-body">
+
+                                <form action="" method="POST">
+
+                                    <!-- Nome -->
+                                    <div class="mb-3">
+                                        <label class="form-label">Nome</label>
+
+                                        <input type="text" class="form-control" name="nome" placeholder="Digite o nome"
+                                            required>
+                                    </div>
+
+                                    <!-- Username -->
+                                    <div class="mb-3">
+                                        <label class="form-label">Username</label>
+
+                                        <input type="text" class="form-control" name="username"
+                                            placeholder="Digite o username" required>
+                                    </div>
+
+                                    <!-- Senha -->
+                                    <div class="mb-3">
+                                        <label class="form-label">Senha</label>
+
+                                        <input type="password" class="form-control" name="senha"
+                                            placeholder="Digite a senha" required>
+                                    </div>
+
+                                    <!-- Tipo -->
+                                    <div class="mb-4">
+                                        <label class="form-label">Tipo</label>
+
+                                        <select class="form-select" name="tipo" required>
+
+                                            <option value="">Selecione</option>
+                                            <option value="admin">Administrador</option>
+                                            <option value="funcionario">Funcionário</option>
+
+                                        </select>
+                                    </div>
+
+                                    <!-- BOTÕES -->
+                                    <div class="row g-2">
+
+                                        <div class="col-md-6 d-grid">
+                                            <button type="submit" class="btn btn-dark">
+                                                Salvar
+                                            </button>
+                                        </div>
+
+                                        <div class="col-md-6 d-grid">
+                                            <button type="button" class="btn btn-dark">
+                                                Atualizar
+                                            </button>
+                                        </div>
+
+                                    </div>
+
+                                </form>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="/assets/css/style.css">
+{% endblock %}
+
+{% block scripts %}
+
+{% endblock %}
