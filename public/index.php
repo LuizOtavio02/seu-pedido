@@ -20,6 +20,7 @@ $routes->addRoute('get', '/admin/equipe','AdminEquipeController@index');
 $routes->addRoute('get', '/api/sessao','ApiAuthController@logado');
 $routes->addRoute('get', '/api/produtos','ApiProdutosController@listarProdutos');
 $routes->addRoute('get', '/api/carrinho','ApiCarrinhoController@index');
+$routes->addRoute('get', '/api/equipe','ApiEquipeController@busca');
 // API POST
 $routes->addRoute('post', '/api/login','ApiAuthController@login');
 $routes->addRoute('post', '/api/cadastro','ApiAuthController@cadastro');

@@ -23,7 +23,6 @@
 
         <div class="container-fluid p-4">
             <div class="container py-5">
-
                 <div class="row justify-content-center">
                     <div class="col-lg-8">
 
@@ -35,27 +34,26 @@
                             </div>
 
                             <div class="card-body">
-
-                                <form class="row g-3">
-
-                                    <div class="col-md-10">
-                                        <input type="text" class="form-control"
-                                            placeholder="Digite o nome ou username do funcionário">
+                                <form id="form-busca" action="" method="GET">
+                                    <div class="input-group">
+                                        <input type="search" name="b" class="form-control"
+                                            placeholder="Digite o nome do funcionario">
+                                        <button class="btn btn-dark">Buscar</button>
                                     </div>
-
-                                    <div class="col-md-2 d-grid">
-                                        <button class="btn btn-dark">
-                                            Buscar
-                                        </button>
-                                    </div>
-
+                                    <div id="message"></div>
                                 </form>
-
                             </div>
+
                         </div>
 
+                        <!-- RESULTADOS -->
+                        <div id="resultadoBusca">
+                        </div>
+
+                            
+
                         <!-- FORMULÁRIO -->
-                        <div class="card shadow-sm">
+                        <div class="card shadow-sm mb-4">
 
                             <div class="card-header text-center">
                                 <h3>Cadastro de Funcionário</h3>
@@ -65,68 +63,85 @@
 
                                 <form action="" method="POST">
 
-                                    <!-- Nome -->
+                                    <!-- NOME -->
                                     <div class="mb-3">
-                                        <label class="form-label">Nome</label>
+
+                                        <label class="form-label">
+                                            Nome
+                                        </label>
 
                                         <input type="text" class="form-control" name="nome" placeholder="Digite o nome"
                                             required>
+
                                     </div>
 
-                                    <!-- Username -->
+                                    <!-- USERNAME -->
                                     <div class="mb-3">
-                                        <label class="form-label">Username</label>
+
+                                        <label class="form-label">
+                                            Username
+                                        </label>
 
                                         <input type="text" class="form-control" name="username"
                                             placeholder="Digite o username" required>
+
                                     </div>
 
-                                    <!-- Senha -->
+                                    <!-- SENHA -->
                                     <div class="mb-3">
-                                        <label class="form-label">Senha</label>
+
+                                        <label class="form-label">
+                                            Senha
+                                        </label>
 
                                         <input type="password" class="form-control" name="senha"
                                             placeholder="Digite a senha" required>
+
                                     </div>
 
-                                    <!-- Tipo -->
+                                    <!-- TIPO -->
                                     <div class="mb-4">
-                                        <label class="form-label">Tipo</label>
+
+                                        <label class="form-label">
+                                            Tipo
+                                        </label>
 
                                         <select class="form-select" name="tipo" required>
 
-                                            <option value="">Selecione</option>
-                                            <option value="admin">Administrador</option>
-                                            <option value="funcionario">Funcionário</option>
+                                            <option value="">
+                                                Selecione
+                                            </option>
+
+                                            <option value="admin">
+                                                Administrador
+                                            </option>
+
+                                            <option value="funcionario">
+                                                Funcionário
+                                            </option>
 
                                         </select>
+
                                     </div>
 
-                                    <!-- BOTÕES -->
-                                    <div class="row g-2">
+                                    <!-- BOTÃO -->
+                                    <div class="d-grid">
 
-                                        <div class="col-md-6 d-grid">
-                                            <button type="submit" class="btn btn-dark">
-                                                Salvar
-                                            </button>
-                                        </div>
+                                        <button type="submit" class="btn btn-dark">
 
-                                        <div class="col-md-6 d-grid">
-                                            <button type="button" class="btn btn-dark">
-                                                Atualizar
-                                            </button>
-                                        </div>
+                                            Salvar
+                                        </button>
 
                                     </div>
 
                                 </form>
 
                             </div>
+
                         </div>
 
                     </div>
                 </div>
-
             </div>
         </div>
     </div>
@@ -138,5 +153,5 @@
 {% endblock %}
 
 {% block scripts %}
-
+<script src="/assets/js/equipe.js"></script>
 {% endblock %}

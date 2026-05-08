@@ -46,6 +46,17 @@ class Model
         return $this->pdo->lastInsertId();
     }
 
+    public function findLike(string $field, string $value)
+    {
+        $query = "select * from {$this->table} where {$field} like :{$field}";
+        $prepare = $this->pdo->prepare($query);
+        $prepare->execute([
+            "{$field}" => $value
+        ]);
+
+        return $prepare->fetch();
+    }
+
 }
 
 
