@@ -1,13 +1,13 @@
 <?php 
 namespace app\controllers;
 
+use Twig\Environment;
+
 class BaseController
 {
-    protected $twig;
+    protected Environment $twig;
 
-    
-
-    public function setTwig($twig)
+    public function setTwig(Environment $twig)
     {
         $this->twig = $twig;
     }

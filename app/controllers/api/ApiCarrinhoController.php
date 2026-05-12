@@ -136,4 +136,19 @@ class ApiCarrinhoController
             'message' => 'Carrinho Atualizado',
         ], JSON_PRETTY_PRINT);
     }
+
+    public function addCliente()
+    {
+        $input = json_decode(file_get_contents("php://input"), true);
+        
+        header('Content-Type: application/json');
+
+        $this->carrinho->addCliente($input['cliente_id']);
+
+        http_response_code(201);
+        echo json_encode([
+            'success' => true,
+            'message' => 'Cliente Adicionado ao carrinho',
+        ], JSON_PRETTY_PRINT);
+    }
 }

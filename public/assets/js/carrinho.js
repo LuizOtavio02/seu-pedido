@@ -115,3 +115,141 @@ document.addEventListener('click', function (e) {
     }
 
 })
+
+document.getElementById('form-busca-cliente').addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    const termo = document.querySelector('input[name="b"]').value;
+    const messageDiv = document.getElementById('message');
+
+    if (termo == "") {
+        messageDiv.textContent = "Preencha o campo";
+        return;
+    }
+
+    fetch(`/api/cliente?b=${termo}`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+        .then(response => response.json())
+        .then(data => {
+            console.log(data);
+            let html = '';
+
+            if (data.success) {
+                html += `<div class="card shadow-sm mb-3">
+
+                                <div class="card-body">
+
+                                    <div class="row align-items-center">
+
+                                        <div class="col-md-8">
+
+                                            <h5 class="mb-1">
+                                                ${data.data.nome}
+                                            </h5>
+
+                                            <p id="cliente-id" class="mb-1 text-muted">
+                                                Id: ${data.data.id}
+                                            </p>
+
+                                            <p class="mb-1 text-muted">
+                                                rua: ${data.endereco.rua}
+                                            </p>
+
+                                            <p class="mb-1 text-muted">
+                                                bairro: ${data.endereco.bairro}
+                                            </p>
+
+                                            <p class="mb-1 text-muted">
+                                                numero: ${data.endereco.numero}
+                                            </p>
+
+                                            <p class="mb-1 text-muted">
+                                                cidade: ${data.endereco.cidade}
+                                            </p>
+                                            
+
+                                        </div>
+
+                                        <div class="col-md-4 text-md-end mt-3 mt-md-0">
+
+                                            <button class="btn btn-outline-dark">
+                                                Editar
+                                            </button>
+                                            <button id="cliente-confirma" data-id="${data.data.id}" class="btn btn-outline-success">
+                                                Confirma
+                                            </button>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>`;
+                document.getElementById('resultadoBusca').innerHTML = html;
+                return;
+            }
+
+            html += `<div class="card shadow-sm mb-3">
+
+                                <div class="card-body">
+
+                                    <div class="row align-items-center">
+
+                                        <div class="col-md-8">
+
+                                            <h5 class="mb-1">
+                                                Cliente Não Encontrado
+                                            </h5>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>`;
+            document.getElementById('resultadoBusca').innerHTML = html;
+        })
+        .catch(error => [
+            console.log('Erro: ', error)
+        ])
+
+})
+
+document.addEventListener('click', function (e) {
+    if (e.target.id === 'cliente-confirma') {
+        e.preventDefault();
+
+        const id = e.target.dataset.id;
+
+        fetch('/api/carrinho/cliente', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                cliente_id: id
+            })
+        })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+                if (data.success) {
+                    e.target.textContent = 'Confirmado';
+                    e.target.classList.remove('btn-outline-success');
+                    e.target.classList.add('btn-success');
+                    e.target.disabled = true;
+                }
+            })
+            .catch(error => console.log('Erro:', error));
+    }
+});

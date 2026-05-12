@@ -1,6 +1,7 @@
 <?php 
 namespace app\controllers;
 
+use app\template\Template;
 use Exception;
 
 class Controller
@@ -9,7 +10,7 @@ class Controller
     private const NAMESPACE_CONTROLLER = "\\app\\controllers\\";
     private const ERROR_CONTROLLER = "\\app\\controllers\\error\\";
     
-    public function call($route, $twig, $param = []) : void
+    public function call(string $route, Template $template, $param = []) : void
     {
         if ($route === 'ErrorController@index') {
             [$controller, $method] = explode('@',$route);
@@ -38,7 +39,7 @@ class Controller
         $controller = new $controllerNamespace;
 
         if (!str_contains($controllerNamespace,'Api')) {
-            $controller->setTwig($twig);
+            $controller->setTwig($template->init());
         }
 
         if (!method_exists($controller,$method)) {

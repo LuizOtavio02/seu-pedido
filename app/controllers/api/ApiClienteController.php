@@ -60,4 +60,30 @@ class ApiClienteController
             'input' => $clienteEndereco
         ], JSON_PRETTY_PRINT);
     }
+
+    public function busca()
+    {
+        $busca = trim($_GET['b']) ?? '';
+
+        header('Content-Type: application/json');
+
+        $cliente = $this->cliente->findLike('nome', $busca);
+        $clienteEndereco = $this->endereco->find('cliente_id', $cliente['id']);
+
+        if ($cliente) {
+            http_response_code(200);
+            echo json_encode([
+                'success' => true,
+                'data' => $cliente,
+                'endereco' => $clienteEndereco
+            ],JSON_PRETTY_PRINT);
+            return;
+        }
+
+        http_response_code(401);
+        echo json_encode([
+            'success' => false,
+            'message' => 'Não foi possível achar o usuario'
+        ],JSON_PRETTY_PRINT);
+    }
 }

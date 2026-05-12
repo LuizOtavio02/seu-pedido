@@ -5,7 +5,7 @@ class Routes
 {
     private array $routes = [];
 
-    public function addRoute($request, $uri, $controller) : void
+    public function addRoute(string $request, string $uri, string $controller) : void
     {   
         $this->routes[$request][$uri] = $controller;
     }

@@ -43,6 +43,28 @@
 
                     </tfoot>
                 </table>
+                <div class="card shadow-sm mb-4">
+
+                    <div class="card-header">
+                        <h4 class="mb-0">Cliente</h4>
+                    </div>
+
+                    <div class="card-body">
+                        <form id="form-busca-cliente" action="" method="GET">
+                            <div class="input-group">
+                                <input type="search" name="b" class="form-control"
+                                    placeholder="Digite o nome do Cliente">
+                                <button class="btn btn-dark">Buscar</button>
+                            </div>
+                            <div id="message"></div>
+                        </form>
+                    </div>
+
+                </div>
+
+                <!-- RESULTADOS -->
+                <div id="resultadoBusca">
+                </div>
                 <div>
                     <button type="button" class="finalizar-compra btn btn-primary btn-lg">
                         Finalizar Compra

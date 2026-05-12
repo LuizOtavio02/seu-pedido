@@ -6,8 +6,8 @@ use app\template\Template;
 
 class Router
 {
-    private $routes;
-    private $uri;
+    private array $routes;
+    private Uri $uri;
 
     public function __construct(Routes $routes) {
         $this->routes = $routes->getRoutes();
@@ -40,7 +40,7 @@ class Router
         return $route;
     }
 
-    private function params($route) : array
+    private function params(string $route) : array
     {
         $search = array_search($route, $this->routes[$this->uri->request()]);
         $explodeUri = explode('/',$this->uri->currentUri());
@@ -53,18 +53,17 @@ class Router
     {
         $controller = new Controller;
         $template = new Template;
-        $twig = $template->init();
 
         if ($this->simpleRoute()) {
-            return $controller->call($this->simpleRoute(),$twig);
+            return $controller->call($this->simpleRoute(),$template);
         }
 
         if ($this->dynamicRoute()) {
             $param = $this->params($this->dynamicRoute());
-            return $controller->call($this->dynamicRoute(), $twig, $param);
+            return $controller->call($this->dynamicRoute(), $template, $param);
         }
 
-        return $controller->call('ErrorController@index', $twig);
+        return $controller->call('ErrorController@index', $template);
     }
 }
 

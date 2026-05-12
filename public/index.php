@@ -21,11 +21,13 @@ $routes->addRoute('get', '/api/sessao','ApiAuthController@logado');
 $routes->addRoute('get', '/api/produtos','ApiProdutosController@listarProdutos');
 $routes->addRoute('get', '/api/carrinho','ApiCarrinhoController@index');
 $routes->addRoute('get', '/api/equipe','ApiEquipeController@busca');
+$routes->addRoute('get', '/api/cliente','ApiClienteController@busca');
 // API POST
 $routes->addRoute('post', '/api/login','ApiAuthController@login');
 $routes->addRoute('post', '/api/cadastro','ApiAuthController@cadastro');
 $routes->addRoute('post', '/api/cliente','ApiClienteController@create');
 $routes->addRoute('post', '/api/carrinho','ApiCarrinhoController@add');
+$routes->addRoute('post', '/api/carrinho/cliente','ApiCarrinhoController@addCliente');
 // API PUT
 $routes->addRoute('put', '/api/carrinho/[0-9]+','ApiCarrinhoController@update');
 // API DELETE
