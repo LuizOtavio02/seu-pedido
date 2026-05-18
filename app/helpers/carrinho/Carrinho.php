@@ -38,13 +38,6 @@ class Carrinho
         }
     }
 
-    public function addCliente(int $id)
-    {
-        if (isset($_SESSION['carrinho']['cliente'])) {
-            return;
-        }
-        $_SESSION['carrinho']['cliente'] = $id;
-    }
 }
 
 

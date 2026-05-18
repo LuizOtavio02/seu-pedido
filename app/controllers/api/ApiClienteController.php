@@ -86,4 +86,6 @@ class ApiClienteController
             'message' => 'Não foi possível achar o usuario'
         ],JSON_PRETTY_PRINT);
     }
+
+    
 }

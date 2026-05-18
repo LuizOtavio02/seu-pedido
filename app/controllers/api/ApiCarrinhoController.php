@@ -4,6 +4,9 @@ namespace app\controllers\api;
 
 use app\helpers\carrinho\Carrinho;
 use app\helpers\carrinho\StatusCarrinho;
+use app\helpers\cliente\Cliente;
+use app\model\site\ClienteModel;
+use app\model\site\EnderecoModel;
 use app\model\site\ProdutoModel;
 
 class ApiCarrinhoController
@@ -11,12 +14,18 @@ class ApiCarrinhoController
     private Carrinho $carrinho;
     private StatusCarrinho $statusCarrinho;
     private ProdutoModel $produtoModel;
+    private Cliente $cliente;
+    private ClienteModel $clienteModel;
+    private EnderecoModel $endereco;
 
     public function __construct()
     {
         $this->carrinho = new Carrinho;
         $this->statusCarrinho = new StatusCarrinho;
         $this->produtoModel = new ProdutoModel;
+        $this->cliente = new Cliente;
+        $this->clienteModel = new ClienteModel;
+        $this->endereco = new EnderecoModel;
     }
 
     public function index()
@@ -38,6 +47,14 @@ class ApiCarrinhoController
             return;
         }
 
+        $cliente = null;
+
+        if ($this->cliente->clienteExiste()) {
+            $cliente = $this->cliente->cliente();
+            $dadosCliente = $this->clienteModel->find('id', $cliente);
+            $enderecoCliente = $this->endereco->find('cliente_id',$cliente);
+        }
+
         foreach ($carrinho as $id => $qtd) {
             $produtoCarrinho = $this->produtoModel->find('id', $id);
             $valor = $produtoCarrinho['preco'];
@@ -55,12 +72,15 @@ class ApiCarrinhoController
         http_response_code(200);
         echo json_encode([
             'success' => true,
+            'cliente' => [
+                'dados' => $dadosCliente,
+                'endereco' => $enderecoCliente
+            ],
             'produtos' => $produtos,
             'total' => [
                 'qtdTotal' => $qtd,
                 'valorCarrinho' => $valorCarrinho
             ]
-
         ], JSON_PRETTY_PRINT);
     }
 
@@ -143,7 +163,7 @@ class ApiCarrinhoController
         
         header('Content-Type: application/json');
 
-        $this->carrinho->addCliente($input['cliente_id']);
+        $this->cliente->addCliente($input['cliente_id']);
 
         http_response_code(201);
         echo json_encode([

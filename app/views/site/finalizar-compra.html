@@ -1,0 +1,36 @@
+{% extends 'layout.html' %}
+
+{% block site_content %}
+<div class="container my-5">
+    <h1 class="mb-4">Finalizar Compra</h1>
+
+    <form action="/compra/finalizar" method="POST">
+        <div class="row g-4">
+
+            <!-- Coluna da Esquerda -->
+            <div id="cardEsquerda" class="col-lg-8">
+
+            </div>
+
+            <!-- Coluna da Direita -->
+            <div class="col-lg-4">
+
+                <div id="cardDireita" class="card shadow-sm sticky-top" style="top: 20px;">
+                    
+                </div>
+                </div>
+
+            </div>
+
+        </div>
+    </form>
+</div>
+{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="/assets/css/style.css">
+{% endblock %}
+
+{% block scripts %}
+<script src="/assets/js/compra.js"></script>
+{% endblock %}

@@ -8,6 +8,7 @@ function carrinho() {
     })
         .then((response => response.json()))
         .then(data => {
+            console.log(data);
             let html = '';
 
             if (!data.produtos || data.produtos.length === 0) {
