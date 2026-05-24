@@ -13,6 +13,7 @@
     ],
     "require": {
         "symfony/var-dumper": "^7.4",
-        "twig/twig": "^3.24"
+        "twig/twig": "^3.24",
+        "mercadopago/dx-php": "^3.10"
     }
 }

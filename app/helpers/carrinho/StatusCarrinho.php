@@ -25,7 +25,11 @@ class StatusCarrinho
 
     public function carrinho()
     {
-        return $_SESSION['carrinho'];
+        if ($this->carrinhoExiste()) {
+            return $_SESSION['carrinho'];
+        }
+
+        return false;
     }
 }
 

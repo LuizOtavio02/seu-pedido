@@ -6,9 +6,9 @@ use app\model\site\FuncionarioModel;
 
 class FuncionarioSession
 {
-    public $funcionario;
-    public $password;
-    public $session;
+    public FuncionarioModel $funcionario;
+    public Password $password;
+    public Session $session;
 
     public function __construct() {
         $this->funcionario = new FuncionarioModel;
@@ -16,7 +16,7 @@ class FuncionarioSession
         $this->session = new Session;
     }
 
-    public function login($username, $senha)
+    public function login(string $username, string $senha)
     {
         $funcionario = $this->funcionario->find('username',$username);
 
@@ -40,7 +40,7 @@ class FuncionarioSession
         }
     }
 
-    public function cadastrar($data)
+    public function cadastrar(array $data)
     {
         $data['senha'] = $this->password->hash($data['senha']);
 
@@ -56,8 +56,5 @@ class FuncionarioSession
         return false;
     }
 }
-
-
-
 
 ?>

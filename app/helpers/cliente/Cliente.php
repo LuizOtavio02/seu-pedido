@@ -10,7 +10,10 @@ class Cliente
 
     public function cliente()
     {
-        return $_SESSION['cliente'];
+        if ($this->clienteExiste()) {
+            return $_SESSION['cliente'];
+        }
+        return false;
     }
 
     public function addCliente(int $id)

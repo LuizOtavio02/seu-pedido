@@ -17,20 +17,21 @@ class Model
     {
         $query = "select * from {$this->table}";
         $prepare = $this->pdo->prepare($query);
-        $prepare->execute();
-
-        return $prepare->fetchAll();
+        if ($prepare->execute()) {
+            return $prepare->fetchAll();
+        }
+        return false;
     }
 
     public function find(string $field, string $value)
     {
         $query = "select * from {$this->table} where {$field} = :{$field}";
         $prepare = $this->pdo->prepare($query);
-        $prepare->execute([
-            "{$field}" => $value
-        ]);
-
-        return $prepare->fetch();
+        if ($prepare->execute([$field => $value])) {
+            return $prepare->fetch();
+        }
+        
+        return false;
     }
 
     public function create(array $data)
@@ -41,20 +42,22 @@ class Model
 
         $query = "insert into {$this->table} ({$columns}) values (:{$placeholder})";
         $prepare = $this->pdo->prepare($query);
-        $prepare->execute($data);
+        if ($prepare->execute($data)) {
+            return $this->pdo->lastInsertId();
+        }
 
-        return $this->pdo->lastInsertId();
+        return false;
     }
 
     public function findLike(string $field, string $value)
     {
         $query = "select * from {$this->table} where {$field} like :{$field}";
         $prepare = $this->pdo->prepare($query);
-        $prepare->execute([
-            "{$field}" => $value
-        ]);
+        if ($prepare->execute([$field => $value])) {
+            return $prepare->fetch();
+        }
 
-        return $prepare->fetch();
+        return false;
     }
 
 }

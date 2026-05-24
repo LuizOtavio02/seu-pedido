@@ -3,7 +3,7 @@ namespace app\helpers\classes;
 
 class Filter
 {
-    public function filter($type, $value)
+    public function filter(string $type, mixed $value)
     {
         switch ($type) {
             case 'string':
@@ -24,9 +24,5 @@ class Filter
         }
     }
 }
-
-
-
-
 
 ?>

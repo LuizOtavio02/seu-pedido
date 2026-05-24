@@ -28,11 +28,20 @@ class ApiCarrinhoController
         $this->endereco = new EnderecoModel;
     }
 
-    public function index()
+    public function index() : void
     {
         $carrinho = $this->statusCarrinho->carrinho();
 
         header('Content-Type: application/json');
+
+        if (!$carrinho) {
+            http_response_code(200);
+            echo json_encode([
+                'success' => false,
+                'message' => 'Carrinho não Existe',
+            ], JSON_PRETTY_PRINT);
+            return;
+        }
 
         $produtos = [];
         $valorCarrinho = 0;
@@ -45,14 +54,6 @@ class ApiCarrinhoController
                 'produtos' => $produtos
             ], JSON_PRETTY_PRINT);
             return;
-        }
-
-        $cliente = null;
-
-        if ($this->cliente->clienteExiste()) {
-            $cliente = $this->cliente->cliente();
-            $dadosCliente = $this->clienteModel->find('id', $cliente);
-            $enderecoCliente = $this->endereco->find('cliente_id',$cliente);
         }
 
         foreach ($carrinho as $id => $qtd) {
@@ -69,22 +70,43 @@ class ApiCarrinhoController
             ];
         }
 
+        $cliente = null;
+
+        if ($this->cliente->clienteExiste()) {
+            $cliente = $this->cliente->cliente();
+            $dadosCliente = $this->clienteModel->find('id', $cliente);
+            $enderecoCliente = $this->endereco->find('cliente_id', $cliente);
+
+            http_response_code(200);
+            echo json_encode([
+                'success' => true,
+                'cliente' => [
+                    'dados' => $dadosCliente,
+                    'endereco' => $enderecoCliente
+                ],
+                'produtos' => $produtos,
+                'total' => [
+                    'qtdTotal' => $qtd,
+                    'valorCarrinho' => $valorCarrinho
+                ]
+            ], JSON_PRETTY_PRINT);
+        }
+
         http_response_code(200);
-        echo json_encode([
-            'success' => true,
-            'cliente' => [
-                'dados' => $dadosCliente,
-                'endereco' => $enderecoCliente
-            ],
-            'produtos' => $produtos,
-            'total' => [
-                'qtdTotal' => $qtd,
-                'valorCarrinho' => $valorCarrinho
-            ]
-        ], JSON_PRETTY_PRINT);
+            echo json_encode([
+                'success' => true,
+                'cliente' => [],
+                'produtos' => $produtos,
+                'total' => [
+                    'qtdTotal' => $qtd,
+                    'valorCarrinho' => $valorCarrinho
+                ]
+            ], JSON_PRETTY_PRINT);
+
+        
     }
 
-    public function add()
+    public function add() : void
     {
         $input = json_decode(file_get_contents("php://input"), true);
 
@@ -109,7 +131,7 @@ class ApiCarrinhoController
         ], JSON_PRETTY_PRINT);
     }
 
-    public function update()
+    public function update() : void
     {
         $input = json_decode(file_get_contents("php://input"), true);
 
@@ -133,7 +155,7 @@ class ApiCarrinhoController
         ], JSON_PRETTY_PRINT);
     }
 
-    public function delete()
+    public function delete() : void
     {
         $input = json_decode(file_get_contents("php://input"), true);
 
@@ -157,10 +179,10 @@ class ApiCarrinhoController
         ], JSON_PRETTY_PRINT);
     }
 
-    public function addCliente()
+    public function addCliente() : void
     {
         $input = json_decode(file_get_contents("php://input"), true);
-        
+
         header('Content-Type: application/json');
 
         $this->cliente->addCliente($input['cliente_id']);

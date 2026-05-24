@@ -10,7 +10,7 @@ class ApiEquipeController
     public function __construct() {
         $this->funcionarioModel = new FuncionarioModel;
     }
-    public function busca()
+    public function busca()  : void
     {
         $busca = trim($_GET['b']) ?? '';
 

@@ -15,7 +15,7 @@ class ApiAuthController
         $this->filter = new Filter;
     }
 
-    public function logado()
+    public function logado() : void
     {
         $retorno = $this->funcionario->logado();
 
@@ -37,7 +37,7 @@ class ApiAuthController
         ],JSON_PRETTY_PRINT);
     }
 
-    public function login()
+    public function login() : void
     {
         $input = json_decode(file_get_contents("php://input"), true);
         
@@ -72,7 +72,7 @@ class ApiAuthController
         ],JSON_PRETTY_PRINT);
     }
 
-    public function cadastro()
+    public function cadastro() : void
     {
         $input = json_decode(file_get_contents("php://input"), true);
 
