@@ -18,6 +18,7 @@ class ApiMercadoPagoController
 
         if ($preference) {
             echo json_encode($preference, JSON_PRETTY_PRINT);
+            return;
         }
 
         echo json_encode([

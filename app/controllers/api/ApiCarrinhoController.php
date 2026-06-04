@@ -45,6 +45,7 @@ class ApiCarrinhoController
 
         $produtos = [];
         $valorCarrinho = 0;
+        $qtdTotal = 0;
 
         if (empty($carrinho)) {
             http_response_code(200);
@@ -61,6 +62,7 @@ class ApiCarrinhoController
             $valor = $produtoCarrinho['preco'];
 
             $valorCarrinho += $valor * $qtd;
+            $qtdTotal += $qtd;
 
             $produtos[] = [
                 'produtos' => $produtoCarrinho,
@@ -86,10 +88,11 @@ class ApiCarrinhoController
                 ],
                 'produtos' => $produtos,
                 'total' => [
-                    'qtdTotal' => $qtd,
+                    'qtdTotal' => $qtdTotal,
                     'valorCarrinho' => $valorCarrinho
                 ]
             ], JSON_PRETTY_PRINT);
+            return;
         }
 
         http_response_code(200);

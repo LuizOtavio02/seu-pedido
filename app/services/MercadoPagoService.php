@@ -34,7 +34,7 @@ class MercadoPagoService
         ]);
 
         return [
-            'url' => $preference->init_point
+            'url' => $preference->sandbox_init_point
         ];
     }
 

@@ -6,7 +6,7 @@ function carrinho() {
     fetch('/api/carrinho', {
         method: 'GET'
     })
-        .then((response => response.json()))
+        .then(response => response.json())
         .then(data => {
             console.log(data);
             let html = '';
@@ -86,7 +86,7 @@ document.addEventListener('click', function (e) {
             })
     }
 
-})
+});
 
 document.addEventListener('click', function (e) {
     if (e.target.classList.contains('btn-delete')) {
@@ -115,7 +115,7 @@ document.addEventListener('click', function (e) {
 
     }
 
-})
+});
 
 document.getElementById('form-busca-cliente').addEventListener('submit', function (e) {
     e.preventDefault();
@@ -224,7 +224,7 @@ document.getElementById('form-busca-cliente').addEventListener('submit', functio
             console.log('Erro: ', error)
         ])
 
-})
+});
 
 document.addEventListener('click', function (e) {
     if (e.target.id === 'cliente-confirma') {
@@ -253,4 +253,24 @@ document.addEventListener('click', function (e) {
             })
             .catch(error => console.log('Erro:', error));
     }
+});
+
+document.addEventListener('click', function (e) {
+    if (e.target.classList.contains('finalizar-compra')) {
+        e.preventDefault();
+        
+        fetch('/api/preference', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.url) {
+                window.location.href = data.url;
+            }
+        })
+    }
+    
 });
