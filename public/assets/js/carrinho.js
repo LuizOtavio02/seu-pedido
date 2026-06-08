@@ -267,6 +267,7 @@ document.addEventListener('click', function (e) {
         })
         .then(response => response.json())
         .then(data => {
+            console.log(data);
             if (data.url) {
                 window.location.href = data.url;
             }

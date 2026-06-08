@@ -17,6 +17,9 @@ $routes->addRoute('get', '/carrinho','CarrinhoController@index');
 $routes->addRoute('get', '/admin','AdminController@index');
 $routes->addRoute('get', '/admin/equipe','AdminEquipeController@index');
 $routes->addRoute('get', '/compra','CompraController@index');
+$routes->addRoute('get', '/pagamento/success','PagamentoController@success');
+$routes->addRoute('get', '/pagamento/success','PagamentoController@pending');
+$routes->addRoute('get', '/pagamento/failure','PagamentoController@failure');
 // API GET
 $routes->addRoute('get', '/api/sessao','ApiAuthController@logado');
 $routes->addRoute('get', '/api/produtos','ApiProdutosController@listarProdutos');

@@ -23,19 +23,23 @@ class MercadoPagoService
 
     public function preference()
     {
-        $preference = $this->cliente->create([
-            "back_urls" => [
-                "success" => "https://test.com/success",
-                "failure" => "https://test.com/failure",
-                "pending" => "https://test.com/pending"
-            ],
-            "items" => $this->items(),
-            "auto_return" => "all",
-        ]);
+        try {
+            $preference = $this->cliente->create([
+                "back_urls" => [
+                    "success" => "https://google.com",
+                    "failure" => "https://google.com",
+                    "pending" => "https://google.com"
+                ],
+                "items" => $this->items(),
+                "auto_return" => "all",
+            ]);
 
-        return [
-            'url' => $preference->sandbox_init_point
-        ];
+            return [
+                'url' => $preference->sandbox_init_point
+            ];
+        } catch (\MercadoPago\Exceptions\MPApiException $e) {
+            var_dump($e);
+        }
     }
 
     public function items()
