@@ -6,7 +6,7 @@ use app\router\Routes;
 require '../vendor/autoload.php';
 
 session_start();
-
+//dd($_SESSION);
 $routes = new Routes;
 // GET
 $routes->addRoute('get', '/','HomeController@index');
@@ -23,7 +23,7 @@ $routes->addRoute('get', '/pagamento/failure','PagamentoController@failure');
 // API GET
 $routes->addRoute('get', '/api/sessao','ApiAuthController@logado');
 $routes->addRoute('get', '/api/produtos','ApiProdutosController@listarProdutos');
-$routes->addRoute('get', '/api/carrinho','ApiCarrinhoController@index');
+$routes->addRoute('get', '/api/carrinho','ApiCarrinhoController@carrinho');
 $routes->addRoute('get', '/api/equipe','ApiEquipeController@busca');
 $routes->addRoute('get', '/api/cliente','ApiClienteController@busca');
 // API POST
@@ -33,6 +33,7 @@ $routes->addRoute('post', '/api/cliente','ApiClienteController@create');
 $routes->addRoute('post', '/api/carrinho','ApiCarrinhoController@add');
 $routes->addRoute('post', '/api/carrinho/cliente','ApiCarrinhoController@addCliente');
 $routes->addRoute('post', '/api/preference','ApiMercadoPagoController@preference');
+$routes->addRoute('post', '/api/pedido','ApiPedidoController@salvar');
 // API PUT
 $routes->addRoute('put', '/api/carrinho/[0-9]+','ApiCarrinhoController@update');
 // API DELETE

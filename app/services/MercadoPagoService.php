@@ -26,12 +26,12 @@ class MercadoPagoService
         try {
             $preference = $this->cliente->create([
                 "back_urls" => [
-                    "success" => "https://google.com",
+                    "success" => "http://www.seupedido.test/pagamento/success",
                     "failure" => "https://google.com",
                     "pending" => "https://google.com"
                 ],
                 "items" => $this->items(),
-                "auto_return" => "all",
+                //"auto_return" => "all",
             ]);
 
             return [

@@ -28,7 +28,7 @@ class ApiCarrinhoController
         $this->endereco = new EnderecoModel;
     }
 
-    public function index() : void
+    public function carrinho() : void
     {
         $carrinho = $this->statusCarrinho->carrinho();
 

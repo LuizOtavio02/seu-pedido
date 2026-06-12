@@ -1,7 +1,7 @@
 <?php 
 namespace app\model;
 
-use app\model\database\Connection;
+use app\model\Transactions;
 use PDO;
 
 class Model
@@ -10,7 +10,7 @@ class Model
     protected string $table;
 
     public function __construct() {
-        $this->pdo = Connection::connect();
+        $this->pdo = Transactions::get();
     }
 
     public function fetchAll()
