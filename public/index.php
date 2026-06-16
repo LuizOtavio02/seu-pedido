@@ -26,6 +26,7 @@ $routes->addRoute('get', '/api/produtos','ApiProdutosController@listarProdutos')
 $routes->addRoute('get', '/api/carrinho','ApiCarrinhoController@carrinho');
 $routes->addRoute('get', '/api/equipe','ApiEquipeController@busca');
 $routes->addRoute('get', '/api/cliente','ApiClienteController@busca');
+$routes->addRoute('get', '/api/pedido','ApiPedidoController@pedido');
 // API POST
 $routes->addRoute('post', '/api/login','ApiAuthController@login');
 $routes->addRoute('post', '/api/cadastro','ApiAuthController@cadastro');

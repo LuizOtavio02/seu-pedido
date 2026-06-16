@@ -5,6 +5,9 @@ namespace app\controllers\api;
 use app\helpers\carrinho\StatusCarrinho;
 use app\helpers\cliente\Cliente;
 use app\helpers\session\Session;
+use app\model\site\ClienteModel;
+use app\model\site\EntregaModel;
+use app\model\site\FuncionarioModel;
 use app\model\site\ItemPedidoModel;
 use app\model\site\PedidoModel;
 use app\model\site\ProdutoModel;
@@ -16,6 +19,9 @@ class ApiPedidoController
     private StatusCarrinho $statusCarrinho;
     private ProdutoModel $produtoModel;
     private PedidoModel $pedidoModel;
+    private FuncionarioModel $funcionarioModel;
+    private ClienteModel $clienteModel;
+    private EntregaModel $entregaModel;
     private ItemPedidoModel $itemPedidoModel;
     private Session $session;
     private Cliente $cliente;
@@ -25,12 +31,15 @@ class ApiPedidoController
         $this->statusCarrinho = new StatusCarrinho;
         $this->produtoModel = new ProdutoModel;
         $this->pedidoModel = new PedidoModel;
+        $this->funcionarioModel = new FuncionarioModel;
+        $this->clienteModel = new ClienteModel;
+        $this->entregaModel = new EntregaModel;
         $this->itemPedidoModel = new ItemPedidoModel;
         $this->session = new Session;
         $this->cliente = new Cliente;
     }
 
-    public function salvar()
+    public function salvar(): void
     {
         $carrinho = $this->statusCarrinho->carrinho();
 
@@ -97,7 +106,6 @@ class ApiPedidoController
                     'success' => true,
                     'message' => 'Pedido Salvo com Sucesso'
                 ], JSON_PRETTY_PRINT);
-
                 return;
             } catch (Exception $e) {
 
@@ -116,6 +124,39 @@ class ApiPedidoController
         echo json_encode([
             'success' => false,
             'message' => 'Não foi possível salvar o pedido'
+        ], JSON_PRETTY_PRINT);
+    }
+
+    public function pedido()
+    {
+        $pedidos = $this->pedidoModel->fetchAll();
+
+        header('Content-Type: application/json');
+
+        foreach ($pedidos as $key => $pedido) {
+            $pedidos[$key]['funcionario'] = $this->funcionarioModel->find('id', $pedido['funcionario_id']);
+            $pedidos[$key]['cliente'] = $this->clienteModel->find('id', $pedido['cliente_id']);
+            $pedidos[$key]['entrega'] = $this->entregaModel->find('id', $pedido['entrega_id']);
+
+            unset(
+                $pedidos[$key]['funcionario_id'],
+                $pedidos[$key]['cliente_id'],
+                $pedidos[$key]['entrega_id']
+            );
+        }
+
+        if ($pedidos) {
+            http_response_code(200);
+            echo json_encode([
+                'success' => true,
+                'pedidos' => $pedidos
+            ], JSON_PRETTY_PRINT);
+            return;
+        }
+        http_response_code(400);
+        echo json_encode([
+            'success' => false,
+            'message' => 'Não foi possível listar os produtos'
         ], JSON_PRETTY_PRINT);
     }
 }
