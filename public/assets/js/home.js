@@ -66,10 +66,6 @@ function pedidos() {
                             </div>
 
                             <div class="card-footer bg-white d-flex gap-2">
-                                <button class="btn btn-outline-primary flex-fill">
-                                    Detalhes
-                                </button>
-
                                 <button class="btn btn-success flex-fill">
                                     Pagar
                                 </button>

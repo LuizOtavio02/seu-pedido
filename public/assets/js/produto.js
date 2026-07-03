@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', function () {
-    produtos();
-    addCarrinho();
+  produtos();
+  addCarrinho();
 });
 
 function produtos() {
@@ -36,19 +36,19 @@ function produtos() {
             </svg>
 
             <div class="card-body">
-              <p class="card-text">${produto.nome}</p>
-              <p class="card-text">${produto.preco}</p>
-
+              <div>
+                  <h6 class="mb-1 fw-semibold">${produto.nome}</h6>
+                  <span class="mb-0 fw-bold fs-5">
+                      R$ ${formatarMoeda(produto.preco)}
+                  </span>
+              </div>
+              <br>
               <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
-                  <a href="/dev/loja-virtual/public/categoria/${produto.produto_slug}" class="btn btn-primary">
-                    Ver produto
-                  </a>
-                  <a href="#" data-id="${produto.id}" class="btn btn-sm btn-outline-secondary btn-add-carrinho">
+                  <a href="#" data-id="${produto.id}" class="btn btn btn-primary btn-add-carrinho">
                     carrinho
                   </a>
                 </div>
-                <small class="text-body-secondary">9 mins</small>
               </div>
             </div>
 
@@ -67,7 +67,7 @@ function produtos() {
 
 function addCarrinho() {
   document.addEventListener('click', function (e) {
-   
+
     if (e.target.classList.contains('btn-add-carrinho')) {
       e.preventDefault();
 
@@ -82,15 +82,15 @@ function addCarrinho() {
           'id': produtoId
         })
       })
-      .then(response => response.json())
-      .then(data => {
-        console.log(data);
-      })
-      .catch(error => {
-        console.log('Erro: ', error);
-      })
+        .then(response => response.json())
+        .then(data => {
+          console.log(data);
+        })
+        .catch(error => {
+          console.log('Erro: ', error);
+        })
     }
   })
-  
-  
+
+
 }

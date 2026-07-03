@@ -16,6 +16,7 @@ $routes->addRoute('get', '/cliente','ClienteController@index');
 $routes->addRoute('get', '/carrinho','CarrinhoController@index');
 $routes->addRoute('get', '/admin','AdminController@index');
 $routes->addRoute('get', '/admin/equipe','AdminEquipeController@index');
+$routes->addRoute('get', '/admin/produtos','AdminProdutosController@index');
 $routes->addRoute('get', '/compra','CompraController@index');
 $routes->addRoute('get', '/pagamento/success','PagamentoController@success');
 $routes->addRoute('get', '/pagamento/success','PagamentoController@pending');
@@ -35,6 +36,7 @@ $routes->addRoute('post', '/api/carrinho','ApiCarrinhoController@add');
 $routes->addRoute('post', '/api/carrinho/cliente','ApiCarrinhoController@addCliente');
 $routes->addRoute('post', '/api/preference','ApiMercadoPagoController@preference');
 $routes->addRoute('post', '/api/pedido','ApiPedidoController@salvar');
+$routes->addRoute('post', '/api/produto','ApiProdutosController@cadastrarProduto');
 // API PUT
 $routes->addRoute('put', '/api/carrinho/[0-9]+','ApiCarrinhoController@update');
 // API DELETE
