@@ -36,8 +36,10 @@
                             <div class="card-body">
                                 <form id="form-busca" action="" method="GET">
                                     <div class="input-group">
-                                        <input type="search" name="b" class="form-control"
-                                            placeholder="Digite o nome do funcionario">
+                                        <input type="text" name="nome" class="form-control"
+                                            placeholder="Digite o nome do funcionario" id="funnncionario" 
+                                            onkeyup="carregarProdutos(this.value)">
+                                        <span id="resultadoPesquisa"></span>
                                         <button class="btn btn-dark">Buscar</button>
                                     </div>
                                     <div id="message"></div>
@@ -154,4 +156,5 @@
 
 {% block scripts %}
 <script src="/assets/js/equipe.js"></script>
+<script src="/assets/js/helpers.js"></script>
 {% endblock %}

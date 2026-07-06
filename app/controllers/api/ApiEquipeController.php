@@ -10,9 +10,10 @@ class ApiEquipeController
     public function __construct() {
         $this->funcionarioModel = new FuncionarioModel;
     }
-    public function busca()  : void
+    public function busca(array $nome)  : void
     {
-        $busca = trim($_GET['b']) ?? '';
+        // $busca = trim($_GET['b']) ?? '';
+        $busca = $nome[0];
 
         $funcionario = $this->funcionarioModel->findLike('nome', $busca);
 
@@ -30,7 +31,8 @@ class ApiEquipeController
         http_response_code(401);
         echo json_encode([
             'success' => false,
-            'message' => 'Não foi possível achar o usuario'
+            'message' => 'Não foi possível achar o usuario',
+            'a' => $busca
         ],JSON_PRETTY_PRINT);
     }
 }
