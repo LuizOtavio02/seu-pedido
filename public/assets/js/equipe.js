@@ -1,15 +1,53 @@
+async function carregarProdutos(valor) {
+    if (valor.length >= 3) {
+        const dados = await fetch('/api/equipe/autocomplete/' + valor);
+        const resposta = await dados.json();
+        console.log(resposta);
+
+        var resultado = "<ul class='list-group position-fixed'>"
+
+        if (resposta['success']) {
+            for (let i = 0; i < resposta['data'].length; i++) {
+                resultado += "<li class='list-group-item list-group-item-action' onclick='listarProduto("+ JSON.stringify(resposta['data'][i].nome) + "," + JSON.stringify(resposta['data'][i].id)+")'>" + resposta['data'][i].nome + "</li>";
+            }
+        } else {
+            resultado += "<li class='list-group-item disabled'> Não Encontrou </li>"
+        }
+
+        resultado += "</ul>"
+
+        document.getElementById("resultadoPesquisa").innerHTML = resultado;
+    }
+}
+
+const fechar = document.getElementById('funcionario');
+
+document.addEventListener('click', function (e) {
+    const validarClick = fechar.contains(e.target);
+    if (!validarClick) {
+        document.getElementById('resultadoPesquisa').innerHTML = '';
+    }    
+})
+
+let funcionarioId = "";
+
+function listarProduto(nome, id) {
+    console.log(nome, id);
+    funcionarioId = id;
+    document.getElementById("funcionario").value = nome;
+}
+
 document.getElementById('form-busca').addEventListener('submit', function (e) {
     e.preventDefault();
 
-    const termo = document.querySelector('input[name="b"]').value;
     const messageDiv = document.getElementById('message');
 
-    if (termo == "") {
+    if (funcionarioId == "") {
         messageDiv.textContent = "Preencha o campo";
         return;
     }
 
-    fetch(`/api/equipe?b=${termo}`, {
+    fetch(`/api/equipe/${funcionarioId}`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json'
@@ -17,6 +55,7 @@ document.getElementById('form-busca').addEventListener('submit', function (e) {
     })
         .then(response => response.json())
         .then(data => {
+            console.log(data);
             let html = '';
 
             if (data.success) {

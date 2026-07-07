@@ -36,12 +36,13 @@
                             <div class="card-body">
                                 <form id="form-busca" action="" method="GET">
                                     <div class="input-group">
-                                        <input type="text" name="nome" class="form-control"
-                                            placeholder="Digite o nome do funcionario" id="funnncionario" 
+                                        <input type="text" name="funcionario" class="form-control"
+                                            placeholder="Digite o nome do funcionario" id="funcionario" 
                                             onkeyup="carregarProdutos(this.value)">
-                                        <span id="resultadoPesquisa"></span>
-                                        <button class="btn btn-dark">Buscar</button>
+                                        
+                                        <button type="submit" class="btn btn-dark">Buscar</button>
                                     </div>
+                                    <span id="resultadoPesquisa"></span>
                                     <div id="message"></div>
                                 </form>
                             </div>

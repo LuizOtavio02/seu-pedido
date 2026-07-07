@@ -25,7 +25,8 @@ $routes->addRoute('get', '/pagamento/failure','PagamentoController@failure');
 $routes->addRoute('get', '/api/sessao','ApiAuthController@logado');
 $routes->addRoute('get', '/api/produtos','ApiProdutosController@listarProdutos');
 $routes->addRoute('get', '/api/carrinho','ApiCarrinhoController@carrinho');
-$routes->addRoute('get', '/api/equipe/[A-Za-z0-9 ]+','ApiEquipeController@busca');
+$routes->addRoute('get', '/api/equipe/autocomplete/[A-Za-z0-9 ]+','ApiEquipeController@autocomplete');
+$routes->addRoute('get', '/api/equipe/[0-9]+','ApiEquipeController@busca');
 $routes->addRoute('get', '/api/cliente','ApiClienteController@busca');
 $routes->addRoute('get', '/api/pedido','ApiPedidoController@pedido');
 // API POST
