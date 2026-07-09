@@ -75,4 +75,53 @@ class ApiProdutosController
             'message' => 'Não foi possível fazer o cadastro'
         ], JSON_PRETTY_PRINT);
     }
+
+    public function busca(array $id): void
+    {
+        $busca = $id[0];
+
+        $funcionario = $this->produto->find('id', $busca);
+
+        header('Content-Type: application/json');
+
+        if ($funcionario) {
+            http_response_code(200);
+            echo json_encode([
+                'success' => true,
+                'data' => $funcionario
+            ], JSON_PRETTY_PRINT);
+            return;
+        }
+
+        http_response_code(401);
+        echo json_encode([
+            'success' => false,
+            'message' => 'Não foi possível achar o usuario',
+            'a' => $busca
+        ], JSON_PRETTY_PRINT);
+    }
+
+    public function autocomplete(array $nome): void
+    {
+        $busca = $nome[0];
+
+        $resultado = $this->produto->findLike('nome', $busca);
+
+        header('Content-Type: application/json');
+
+        if ($resultado) {
+            http_response_code(200);
+            echo json_encode([
+                'success' => true,
+                'data' => $resultado
+            ], JSON_PRETTY_PRINT);
+            return;
+        }
+
+        http_response_code(401);
+        echo json_encode([
+            'success' => false,
+            'message' => 'Não foi possível encontrar um resultado',
+        ], JSON_PRETTY_PRINT);
+    }
 }

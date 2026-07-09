@@ -27,6 +27,8 @@ $routes->addRoute('get', '/api/produtos','ApiProdutosController@listarProdutos')
 $routes->addRoute('get', '/api/carrinho','ApiCarrinhoController@carrinho');
 $routes->addRoute('get', '/api/equipe/autocomplete/[A-Za-z0-9 ]+','ApiEquipeController@autocomplete');
 $routes->addRoute('get', '/api/equipe/[0-9]+','ApiEquipeController@busca');
+$routes->addRoute('get', '/api/produtos/autocomplete/[A-Za-z0-9 ]+','ApiProdutosController@autocomplete');
+$routes->addRoute('get', '/api/produtos/[0-9]+','ApiProdutosController@busca');
 $routes->addRoute('get', '/api/cliente','ApiClienteController@busca');
 $routes->addRoute('get', '/api/pedido','ApiPedidoController@pedido');
 // API POST
@@ -40,6 +42,7 @@ $routes->addRoute('post', '/api/pedido','ApiPedidoController@salvar');
 $routes->addRoute('post', '/api/produto','ApiProdutosController@cadastrarProduto');
 // API PUT
 $routes->addRoute('put', '/api/carrinho/[0-9]+','ApiCarrinhoController@update');
+$routes->addRoute('put', '/api/funcionario/[0-9]+','ApiEquipeController@update');
 // API DELETE
 $routes->addRoute('delete', '/api/carrinho/[0-9]+','ApiCarrinhoController@delete');
 

@@ -1,4 +1,5 @@
-<?php 
+<?php
+
 namespace app\controllers\api;
 
 use app\model\site\FuncionarioModel;
@@ -7,14 +8,46 @@ class ApiEquipeController
 {
     private FuncionarioModel $funcionarioModel;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->funcionarioModel = new FuncionarioModel;
     }
 
-    public function busca(array $id)  : void
+    public function update(array $id): void
     {
-        // $busca = trim($_GET['b']) ?? '';
-        
+        $funcionario = $id[0];
+
+        $input = json_decode(file_get_contents("php://input"), true);
+
+        if (!$input) {
+            http_response_code(400);
+            echo json_encode([
+                'success' => false,
+                'message' => 'Não Atualizar o Funcionario'
+            ], JSON_PRETTY_PRINT);
+            return;
+        }
+
+        $update = $this->funcionarioModel->update($funcionario,$input);
+
+        if (!$update) {
+            http_response_code(400);
+            echo json_encode([
+                'success' => false,
+                'message' => 'Não Atualizar o Funcionario'
+            ], JSON_PRETTY_PRINT);
+            return;
+        }
+
+        http_response_code(200);
+        echo json_encode([
+            'success' => true,
+            'message' => 'Funcionario Atualizado com sucesso'
+        ], JSON_PRETTY_PRINT);
+    }
+
+    public function busca(array $id): void
+    {
         $busca = $id[0];
 
         $funcionario = $this->funcionarioModel->find('id', $busca);
@@ -26,7 +59,7 @@ class ApiEquipeController
             echo json_encode([
                 'success' => true,
                 'data' => $funcionario
-            ],JSON_PRETTY_PRINT);
+            ], JSON_PRETTY_PRINT);
             return;
         }
 
@@ -35,11 +68,11 @@ class ApiEquipeController
             'success' => false,
             'message' => 'Não foi possível achar o usuario',
             'a' => $busca
-        ],JSON_PRETTY_PRINT);
+        ], JSON_PRETTY_PRINT);
     }
 
-    public function autocomplete(array $nome)  : void
-    {      
+    public function autocomplete(array $nome): void
+    {
         $busca = $nome[0];
 
         $resultado = $this->funcionarioModel->findLike('nome', $busca);
@@ -51,7 +84,7 @@ class ApiEquipeController
             echo json_encode([
                 'success' => true,
                 'data' => $resultado
-            ],JSON_PRETTY_PRINT);
+            ], JSON_PRETTY_PRINT);
             return;
         }
 
@@ -59,14 +92,6 @@ class ApiEquipeController
         echo json_encode([
             'success' => false,
             'message' => 'Não foi possível encontrar um resultado',
-        ],JSON_PRETTY_PRINT);
+        ], JSON_PRETTY_PRINT);
     }
 }
-
-
-
-
-
-
-
-?>

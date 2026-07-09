@@ -37,9 +37,9 @@
                                 <form id="form-busca" action="" method="GET">
                                     <div class="input-group">
                                         <input type="text" name="funcionario" class="form-control"
-                                            placeholder="Digite o nome do funcionario" id="funcionario" 
+                                            placeholder="Digite o nome do funcionario" id="funcionario"
                                             onkeyup="carregarProdutos(this.value)">
-                                        
+
                                         <button type="submit" class="btn btn-dark">Buscar</button>
                                     </div>
                                     <span id="resultadoPesquisa"></span>
@@ -51,9 +51,54 @@
 
                         <!-- RESULTADOS -->
                         <div id="resultadoBusca">
+
                         </div>
 
-                            
+                        <!-- Modal fica FORA -->
+                        <div class="modal fade" id="modalEditar" tabindex="-1">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">Editar Funcionário</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal">
+                                        </button>
+                                    </div>
+
+                                    <div class="modal-body">
+
+                                        <input type="hidden" id="editar-id">
+
+                                        <div class="mb-3">
+                                            <label class="form-label">Nome</label>
+                                            <input type="text" class="form-control" id="editar-nome">
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label class="form-label">Username</label>
+                                            <input type="text" class="form-control" id="editar-username">
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label class="form-label">Tipo</label>
+                                            <input type="text" class="form-control" id="editar-tipo">
+                                        </div>
+
+                                    </div>
+
+                                    <div class="modal-footer">
+                                        <button class="btn btn-secondary" data-bs-dismiss="modal">
+                                            Cancelar
+                                        </button>
+
+                                        <button class="btn btn-dark" id="salvar-edicao">
+                                            Salvar
+                                        </button>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
 
                         <!-- FORMULÁRIO -->
                         <div class="card shadow-sm mb-4">

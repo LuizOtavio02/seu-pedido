@@ -1,6 +1,6 @@
 async function carregarProdutos(valor) {
     if (valor.length >= 3) {
-        const dados = await fetch('/api/equipe/autocomplete/' + valor);
+        const dados = await fetch('/api/produtos/autocomplete/' + valor);
         const resposta = await dados.json();
         console.log(resposta);
 
@@ -20,7 +20,7 @@ async function carregarProdutos(valor) {
     }
 }
 
-const fechar = document.getElementById('funcionario');
+const fechar = document.getElementById('produto');
 
 document.addEventListener('click', function (e) {
     const validarClick = fechar.contains(e.target);
@@ -29,12 +29,12 @@ document.addEventListener('click', function (e) {
     }
 })
 
-let funcionarioId = "";
+let produtoId = "";
 
 function listarProduto(nome, id) {
     console.log(nome, id);
-    funcionarioId = id;
-    document.getElementById("funcionario").value = nome;
+    produtoId = id;
+    document.getElementById("pesquisaProduto").value = nome;
 }
 
 document.getElementById('form-busca').addEventListener('submit', function (e) {
@@ -42,12 +42,12 @@ document.getElementById('form-busca').addEventListener('submit', function (e) {
 
     const messageDiv = document.getElementById('message');
 
-    if (funcionarioId == "") {
+    if (produtoId == "") {
         messageDiv.textContent = "Preencha o campo";
         return;
     }
 
-    fetch(`/api/equipe/${funcionarioId}`, {
+    fetch(`/api/produtos/${produtoId}`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json'
@@ -68,10 +68,14 @@ document.getElementById('form-busca').addEventListener('submit', function (e) {
 
                                         <p>Id: ${data.data.id}</p>
 
-                                        <p>Username: ${data.data.username}</p>
+                                        <p>preço: ${data.data.preco}</p>
+
+                                        <p>estoque: ${data.data.estoque}</p>
+
+                                        <p>slug: ${data.data.produto_slug}</p>
 
                                         <span class="badge bg-dark">
-                                            ${data.data.tipo}
+                                            ${data.data.categoria_id}
                                         </span>
                                     </div>
 
@@ -80,8 +84,10 @@ document.getElementById('form-busca').addEventListener('submit', function (e) {
                                             class="btn btn-outline-dark btn-editar"
                                             data-id="${data.data.id}"
                                             data-nome="${data.data.nome}"
-                                            data-username="${data.data.username}"
-                                            data-tipo="${data.data.tipo}">
+                                            data-preco="${data.data.preco}"
+                                            data-estoque="${data.data.estoque}"
+                                            data-slug="${data.data.produto_slug}"
+                                            data-categoria-id="${data.data.categoria_id}">
                                             Editar
                                         </button>
                                     </div>
@@ -101,11 +107,17 @@ document.getElementById('form-busca').addEventListener('submit', function (e) {
                     document.getElementById('editar-nome').value =
                         this.dataset.nome;
 
-                    document.getElementById('editar-username').value =
-                        this.dataset.username;
+                    document.getElementById('editar-preco').value =
+                        this.dataset.preco;
 
-                    document.getElementById('editar-tipo').value =
-                        this.dataset.tipo;
+                    document.getElementById('editar-estoque').value =
+                        this.dataset.estoque;
+
+                    document.getElementById('editar-slug').value =
+                        this.dataset.slug;
+
+                    document.getElementById('editar-categoriaId').value =
+                        this.dataset.categoriaId;
 
                     const modal = new bootstrap.Modal(
                         document.getElementById('modalEditar')

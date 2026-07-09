@@ -51,6 +51,25 @@ class Model
         return false;
     }
 
+    public function update(int $id, array $data): bool
+    {
+        $campos = [];
+
+        foreach ($data as $campo => $valor) {
+            $campos[] = "{$campo} = :{$campo}";
+        }
+
+        $query = "UPDATE {$this->table}
+              SET " . implode(', ', $campos) . "
+              WHERE id = :id";
+
+        $prepare = $this->pdo->prepare($query);
+
+        $data['id'] = $id;
+
+        return $prepare->execute($data);
+    }
+
     public function findLike(string $field, string $value)
     {
         $query = "SELECT * FROM {$this->table}
@@ -67,22 +86,4 @@ class Model
 
         return !empty($dados) ? $dados : false;
     }
-
-    // public function findLike(string $field, string $value)
-    // {
-    //     $query = "select * from {$this->table} where {$field} like :{$field} limit 1";
-    //     $prepare = $this->pdo->prepare($query);
-    //     $prepare->execute([$field => $value]);
-
-    //     if (($prepare) and ($prepare->rowCount() != 0)) {
-    //         while ($rowProduto = $prepare->fetch(PDO::FETCH_ASSOC)) {
-    //             return $dados[] = [
-    //                 'funcionario' => $rowProduto
-    //             ];
-    //         }
-    //     }
-
-    //     return false;
-    // }
-
 }
