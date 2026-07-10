@@ -43,6 +43,7 @@ $routes->addRoute('post', '/api/produto','ApiProdutosController@cadastrarProduto
 // API PUT
 $routes->addRoute('put', '/api/carrinho/[0-9]+','ApiCarrinhoController@update');
 $routes->addRoute('put', '/api/funcionario/[0-9]+','ApiEquipeController@update');
+$routes->addRoute('put', '/api/produto/[0-9]+','ApiProdutosController@update');
 // API DELETE
 $routes->addRoute('delete', '/api/carrinho/[0-9]+','ApiCarrinhoController@delete');
 

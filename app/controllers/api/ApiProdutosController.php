@@ -76,6 +76,39 @@ class ApiProdutosController
         ], JSON_PRETTY_PRINT);
     }
 
+    public function update(array $id): void
+    {
+        $produto = $id[0];
+
+        $input = json_decode(file_get_contents("php://input"), true);
+
+        if (!$input) {
+            http_response_code(400);
+            echo json_encode([
+                'success' => false,
+                'message' => 'Não foi possível Atualizar o Produto'
+            ], JSON_PRETTY_PRINT);
+            return;
+        }
+
+        $update = $this->produto->update($produto,$input);
+
+        if (!$update) {
+            http_response_code(400);
+            echo json_encode([
+                'success' => false,
+                'message' => 'Não foi possível Atualizar o Produto'
+            ], JSON_PRETTY_PRINT);
+            return;
+        }
+
+        http_response_code(200);
+        echo json_encode([
+            'success' => true,
+            'message' => 'Produto Atualizado com sucesso'
+        ], JSON_PRETTY_PRINT);
+    }
+
     public function busca(array $id): void
     {
         $busca = $id[0];

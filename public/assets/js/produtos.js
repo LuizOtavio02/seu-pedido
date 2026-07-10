@@ -166,11 +166,13 @@ document.getElementById('salvar-edicao')
 
         const dados = {
             nome: document.getElementById('editar-nome').value,
-            username: document.getElementById('editar-username').value,
-            tipo: document.getElementById('editar-tipo').value
+            preco: document.getElementById('editar-preco').value,
+            produto_slug: document.getElementById('editar-slug').value,
+            estoque: document.getElementById('editar-estoque').value,
+            categoria_id: document.getElementById('editar-categoriaId').value
         };
 
-        const response = await fetch(`/api/funcionario/${id}`, {
+        const response = await fetch(`/api/produto/${id}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'
